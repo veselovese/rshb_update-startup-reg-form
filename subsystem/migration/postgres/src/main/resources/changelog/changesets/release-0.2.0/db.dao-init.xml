@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="create-puzzles-schema" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-puzzles-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create puzzles schema</comment>
+    </changeSet>
+
+    <changeSet id="create-crossword-tables" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-crossword-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create crossword feature tables</comment>
+    </changeSet>
+
+    <changeSet id="create-contest-chef-schema" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-contest-chef-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create Chef contest dedicated schema</comment>
+    </changeSet>
+
+    <changeSet id="create-contest-chef-tables" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-contest-chef-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create Chef contest tables</comment>
+    </changeSet>
+
+</databaseChangeLog>

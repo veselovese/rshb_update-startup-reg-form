@@ -1,0 +1,14 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.content.provider'
+description = 'Content Provider API'
+
+base {
+    archivesName = 'content-provider-api'
+}
+
+dependencies {
+    api project(':subsystem:content:model')
+}

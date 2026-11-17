@@ -1,0 +1,18 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.puzzles'
+description = 'Puzzles Entity'
+
+base {
+    archivesName = 'puzzles-entity'
+}
+
+dependencies {
+
+    implementation project(':feature:puzzles:dto')
+    implementation project(':subsystem:content:model')
+
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+}

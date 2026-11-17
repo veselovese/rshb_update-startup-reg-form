@@ -1,0 +1,13 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.censor'
+description = 'Censor API'
+
+base {
+    archivesName = 'censor-api'
+}
+
+dependencies {
+}

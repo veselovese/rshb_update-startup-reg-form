@@ -1,0 +1,27 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.audit'
+description = 'Notification Log'
+
+base {
+    archivesName = 'audit-notification-log'
+}
+
+dependencies {
+
+    implementation project(':commons:utils')
+
+    implementation project(':subsystem:events')
+    implementation project(':subsystem:notifications:api')
+
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+    implementation 'jakarta.transaction:jakarta.transaction-api'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation utilLibs.apache.commons.collections4
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework.data:spring-data-jpa'
+}

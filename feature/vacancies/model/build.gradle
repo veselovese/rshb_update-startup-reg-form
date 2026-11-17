@@ -1,0 +1,17 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.vacancies'
+description = 'Vacancies Model'
+
+base {
+    archivesName = 'vacancies-model'
+}
+
+dependencies {
+
+    implementation project(':commons:validation')
+
+    implementation metaLibs.openapi.starter
+}

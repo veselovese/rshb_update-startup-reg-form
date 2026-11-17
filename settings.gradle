@@ -1,0 +1,284 @@
+rootProject.name = 'digital'
+
+dependencyResolutionManagement {
+
+    repositories {
+        mavenCentral()
+    }
+
+    pluginManagement {
+        repositories {
+            gradlePluginPortal()
+        }
+    }
+
+    versionCatalogs {
+
+        utilLibs {
+            library('guava', 'com.google.guava:guava:32.1.3-jre')
+            library('apache-commons-text', 'org.apache.commons:commons-text:1.10.0')
+            library('apache-commons-collections4', 'org.apache.commons:commons-collections4:4.4')
+            library('apache-commons-io', 'commons-io:commons-io:2.11.0')
+            library('apache-poi-ooxml', 'org.apache.poi:poi-ooxml:5.2.4')
+            library('bucket4j', 'com.github.vladimir-bukhtoyarov:bucket4j-core:7.6.0')
+        }
+
+        metaLibs {
+            library('prometeus', 'io.micrometer:micrometer-registry-prometheus:1.11.4')
+            library('openapi-starter', 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0')
+            library('swagger-annotations', 'io.swagger.core.v3:swagger-annotations-jakarta:2.2.15')
+        }
+
+        clientLibs {
+            library('vk-sdk', 'com.vk.api:sdk:1.0.14')
+        }
+
+        logLibs {
+            version('logback-module', '0.1.5')
+
+            library('logback-module-jackson', "ch.qos.logback.contrib", "logback-jackson").versionRef('logback-module')
+            library('logback-module-json', "ch.qos.logback.contrib", "logback-json-classic").versionRef('logback-module')
+        }
+
+        testLibs {
+            version('testcontainers', '1.18.3')
+
+            library('testcontainers-postgres', "org.testcontainers", 'postgresql').versionRef('testcontainers')
+            library('testcontainers-jupiter', "org.testcontainers", 'junit-jupiter').versionRef('testcontainers')
+        }
+    }
+}
+
+include(':commons:dto')
+project(':commons:dto').projectDir = file('commons/dto')
+
+include(':commons:forms')
+project(':commons:forms').projectDir = file('commons/forms')
+
+include ('commons:test')
+project(':commons:test').projectDir = file('commons/test')
+
+include(':commons:utils')
+project(':commons:utils').projectDir = file('commons/utils')
+
+include(':commons:validation')
+project(':commons:validation').projectDir = file('commons/validation')
+
+include(':digital-service')
+project(':digital-service').projectDir = file('digital-service')
+
+include(':test-coverage')
+project(':test-coverage').projectDir = file('test-coverage')
+
+include(':subsystem:audit:system-log')
+project(':subsystem:audit:system-log').projectDir = file('subsystem/audit/system-log')
+
+include(':subsystem:audit:notification-log')
+project(':subsystem:audit:notification-log').projectDir = file('subsystem/audit/notification-log')
+
+include(':subsystem:censor:api')
+project(':subsystem:censor:api').projectDir = file('subsystem/censor/api')
+
+include(':subsystem:censor:dictionary')
+project(':subsystem:censor:dictionary').projectDir = file('subsystem/censor/dictionary')
+
+include(':subsystem:censor:forms')
+project(':subsystem:censor:forms').projectDir = file('subsystem/censor/forms')
+
+include(':subsystem:notifications:api')
+project(':subsystem:notifications:api').projectDir = file('subsystem/notifications/api')
+
+include(':subsystem:notifications:core')
+project(':subsystem:notifications:core').projectDir = file('subsystem/notifications/core')
+
+include(':subsystem:notifications:mail')
+project(':subsystem:notifications:mail').projectDir = file('subsystem/notifications/mail')
+
+include(':subsystem:notifications:entity')
+project(':subsystem:notifications:entity').projectDir = file('subsystem/notifications/entity')
+
+include(':subsystem:notifications:internal')
+project(':subsystem:notifications:internal').projectDir = file('subsystem/notifications/internal')
+
+include(':subsystem:messages')
+project(':subsystem:messages').projectDir = file('subsystem/messages')
+
+include(':subsystem:content:model')
+project(':subsystem:content:model').projectDir = file('subsystem/content/model')
+
+include(':subsystem:content:provider:api')
+project(':subsystem:content:provider:api').projectDir = file('subsystem/content/provider/api')
+
+include(':subsystem:content:provider:elasticsearch:core')
+project(':subsystem:content:provider:elasticsearch:core').projectDir = file('subsystem/content/provider/elasticsearch/core')
+
+include(':subsystem:content:provider:elasticsearch:config')
+project(':subsystem:content:provider:elasticsearch:config').projectDir = file('subsystem/content/provider/elasticsearch/config')
+
+include(':subsystem:migration:postgres')
+project(':subsystem:migration:postgres').projectDir = file('subsystem/migration/postgres')
+
+include(':subsystem:integrations:vk')
+project(':subsystem:integrations:vk').projectDir = file('subsystem/integrations/vk')
+
+include(':feature:agrobit:core')
+project(':feature:agrobit:core').projectDir = file('feature/agrobit/core')
+
+include(':feature:blogs:core')
+project(':feature:blogs:core').projectDir = file('feature/blogs/core')
+
+include(':feature:contests:chef')
+project(':feature:contests:chef').projectDir = file('feature/contests/chef')
+
+include(':feature:contests:olympiad')
+project(':feature:contests:olympiad').projectDir = file('feature/contests/olympiad')
+
+include(':feature:contests:patent')
+project(':feature:contests:patent').projectDir = file('feature/contests/patent')
+
+include(':feature:contests:stipend')
+project(':feature:contests:stipend').projectDir = file('feature/contests/stipend')
+
+include(':subsystem:content:index')
+project(':subsystem:content:index').projectDir = file('subsystem/content/index')
+
+include(':feature:feedback:core')
+project(':feature:feedback:core').projectDir = file('feature/feedback/core')
+
+include(':feature:innovations:core')
+project(':feature:innovations:core').projectDir = file('feature/innovations/core')
+
+include(':feature:internship:core')
+project(':feature:internship:core').projectDir = file('feature/internship/core')
+
+include(':feature:publications:dto')
+project(':feature:publications:dto').projectDir = file('feature/publications/dto')
+
+include(':feature:publications:entity')
+project(':feature:publications:entity').projectDir = file('feature/publications/entity')
+
+include(':feature:publications:core')
+project(':feature:publications:core').projectDir = file('feature/publications/core')
+
+include(':feature:puzzles:dto')
+project(':feature:puzzles:dto').projectDir = file('feature/puzzles/dto')
+
+include(':feature:puzzles:entity')
+project(':feature:puzzles:entity').projectDir = file('feature/puzzles/entity')
+
+include(':feature:puzzles:core')
+project(':feature:puzzles:core').projectDir = file('feature/puzzles/core')
+
+include(':feature:references:countries:entity')
+project(':feature:references:countries:entity').projectDir = file('feature/references/countries/entity')
+
+include(':feature:references:countries:core')
+project(':feature:references:countries:core').projectDir = file('feature/references/countries/core')
+
+include(':feature:references:universities:api')
+project(':feature:references:universities:api').projectDir = file('feature/references/universities/api')
+
+include(':feature:references:universities:vk')
+project(':feature:references:universities:vk').projectDir = file('feature/references/universities/vk')
+
+include(':feature:references:universities:dto')
+project(':feature:references:universities:dto').projectDir = file('feature/references/universities/dto')
+
+include(':feature:references:universities:entity')
+project(':feature:references:universities:entity').projectDir = file('feature/references/universities/entity')
+
+include(':feature:references:universities:core')
+project(':feature:references:universities:core').projectDir = file('feature/references/universities/core')
+
+include(':feature:references:universities:raoo-loader')
+project(':feature:references:universities:raoo-loader').projectDir = file('feature/references/universities/raoo-loader')
+
+include(':feature:references:cities:dto')
+project(':feature:references:cities:dto').projectDir = file('feature/references/cities/dto')
+
+include(':feature:references:cities:core')
+project(':feature:references:cities:core').projectDir = file('feature/references/cities/core')
+
+include(':feature:references:cities:entity')
+project(':feature:references:cities:entity').projectDir = file('feature/references/cities/entity')
+
+include(':feature:references:cities:okato-loader')
+project(':feature:references:cities:okato-loader').projectDir = file('feature/references/cities/okato-loader')
+
+include(':feature:references:locations:api')
+project(':feature:references:locations:api').projectDir = file('feature/references/locations/api')
+
+include(':feature:references:locations:vk')
+project(':feature:references:locations:vk').projectDir = file('feature/references/locations/vk')
+
+include(':feature:statistics:entity')
+project(':feature:statistics:entity').projectDir = file('feature/statistics/entity')
+
+include(':feature:statistics:agrobit:commons')
+project(':feature:statistics:agrobit:commons').projectDir = file('feature/statistics/agrobit/commons')
+
+include(':feature:statistics:agrobit:sf-client')
+project(':feature:statistics:agrobit:sf-client').projectDir = file('feature/statistics/agrobit/sf-client')
+
+include(':feature:statistics:agrobit:salary')
+project(':feature:statistics:agrobit:salary').projectDir = file('feature/statistics/agrobit/salary')
+
+include(':feature:statistics:agrobit:tourism')
+project(':feature:statistics:agrobit:tourism').projectDir = file('feature/statistics/agrobit/tourism')
+
+include(':feature:statistics:agrobit:university')
+project(':feature:statistics:agrobit:university').projectDir = file('feature/statistics/agrobit/university')
+
+include(':feature:statistics:forms:entity')
+project(':feature:statistics:forms:entity').projectDir = file('feature/statistics/forms/entity')
+
+include(':feature:statistics:forms:api')
+project(':feature:statistics:forms:api').projectDir = file('feature/statistics/forms/api')
+
+include(':feature:statistics:forms:core')
+project(':feature:statistics:forms:core').projectDir = file('feature/statistics/forms/core')
+
+include(':feature:subscriptions:dto')
+project(':feature:subscriptions:dto').projectDir = file('feature/subscriptions/dto')
+
+include(':feature:subscriptions:entity')
+project(':feature:subscriptions:entity').projectDir = file('feature/subscriptions/entity')
+
+include(':feature:subscriptions:core')
+project(':feature:subscriptions:core').projectDir = file('feature/subscriptions/core')
+
+include(':feature:vacancies:model')
+project(':feature:vacancies:model').projectDir = file('feature/vacancies/model')
+
+include(':feature:vacancies:entity')
+project(':feature:vacancies:entity').projectDir = file('feature/vacancies/entity')
+
+include(':feature:vacancies:core')
+project(':feature:vacancies:core').projectDir = file('feature/vacancies/core')
+
+include(':feature:vacancies:hh')
+project(':feature:vacancies:hh').projectDir = file('feature/vacancies/hh')
+
+include(':subsystem:events')
+project(':subsystem:events').projectDir = file('subsystem/events')
+
+include(':subsystem:content:files')
+project(':subsystem:content:files').projectDir = file('subsystem/content/files')
+
+include(':feature:startups:core')
+project(':feature:startups:core').projectDir = file('feature/startups/core')
+
+include(':feature:references:locations:cache')
+project(':feature:references:locations:cache').projectDir = file('feature/references/locations/cache')
+
+include(':feature:patents:core')
+project(':feature:patents:core').projectDir = file('feature/patents/core')
+
+include(':feature:downloads:core')
+project(':feature:downloads:core').projectDir = file('feature/downloads/core')
+
+include(':tools:agrobit')
+project(':tools:agrobit').projectDir = file('tools/agrobit')
+
+include(':tools:internship')
+project(':tools:internship').projectDir = file('tools/internship')

@@ -1,0 +1,21 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.puzzles'
+description = 'Puzzles DTO'
+
+base {
+    archivesName = 'puzzles-dto'
+}
+
+dependencies {
+
+    implementation project(':commons:dto')
+    implementation project(':commons:validation')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:content:model')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation metaLibs.openapi.starter
+}

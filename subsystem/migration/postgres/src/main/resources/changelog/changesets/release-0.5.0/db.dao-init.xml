@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="create-innovations-schema" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-innovations-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create innovations schema</comment>
+    </changeSet>
+
+    <changeSet id="create-innovations-tables" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-innovations-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create innovation tables</comment>
+    </changeSet>
+
+</databaseChangeLog>

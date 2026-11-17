@@ -1,0 +1,39 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.puzzles'
+description = 'Puzzles Core'
+
+base {
+    archivesName = 'puzzles-core'
+}
+
+dependencies {
+
+    api project(':feature:puzzles:dto')
+    api project(':feature:puzzles:entity')
+
+    implementation project(':commons:dto')
+    implementation project(':commons:forms')
+    implementation project(':commons:utils')
+    implementation project(':commons:validation')
+    implementation project(':feature:statistics:forms:api')
+    implementation project(':subsystem:censor:forms')
+    implementation project(':subsystem:content:model')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:notifications:internal')
+    implementation project(':subsystem:audit:system-log')
+    implementation project(':subsystem:events')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation utilLibs.apache.commons.collections4
+}
+
+tasks.named('test') {
+    it.enabled = false
+}

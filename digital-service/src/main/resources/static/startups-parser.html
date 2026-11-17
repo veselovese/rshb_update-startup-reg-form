@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <title>Парсер стартапов</title>
+    <meta charset="UTF-8">
+
+    <style>
+        * {
+            font-family: arial, serif
+        }
+
+        div {
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div>
+        <h1>Генератор карточек компаний</h1>
+    </div>
+
+    <div>
+        <h2>Шаг 1: Скачайте образец и внесите необходимые данные</h2>
+        <p>
+            <a href="/internal/web/static/startups.xlsx">Образец Excel-файла</a>
+        </p>
+        <p>
+            <span>Примечения:</span>
+        <ul>
+            <li>Парсер читает только первый лист документа;</li>
+            <li>Парсер начинает чтение данных таблицы с 3-ей строки (после шапок);</li>
+            <li>Чтение строк производится до первой пустой строки;</li>
+            <li>Порядок колонок в таблице не должен изменяться.</li>
+        </ul>
+        </p>
+    </div>
+
+    <div>
+
+        <h2>Шаг 2: Загрузите заполненную таблицу</h2>
+
+        <form action="/api/v1/internal/startups/convert"
+              enctype="multipart/form-data"
+              method="post">
+
+            <div>
+                <input accept=".xlsx"
+                       id="startupsFile"
+                       name="startupsFile"
+                       required
+                       type="file">
+            </div>
+
+            <div>
+                <input id="submit"
+                       type="submit"
+                       value="Загрузить">
+            </div>
+        </form>
+
+        <p>После загрузки заполненного файла система вернет архив со сгенерированными JSON-файлами.</p>
+    </div>
+</div>
+</body>

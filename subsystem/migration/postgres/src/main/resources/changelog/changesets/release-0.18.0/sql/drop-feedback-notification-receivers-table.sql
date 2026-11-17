@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS digital_feedback.o_plt_notification_receivers;

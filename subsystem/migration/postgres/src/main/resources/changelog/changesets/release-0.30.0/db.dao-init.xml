@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="add-column-audit-log-instance" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-column-audit-log-instance.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add column instance to audit log table</comment>
+    </changeSet>
+
+    <changeSet id="add-column-intern-pref-hours" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-column-intern-pref-hours.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add column pref work hours and ref table</comment>
+    </changeSet>
+
+    <changeSet id="update-internship-internal-notif-template" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/update-internship-internal-notif-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Update internship registration internal notification email template</comment>
+    </changeSet>
+
+    <changeSet id="create-shared-file-index" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-shared-file-index.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create shared file index schema and table</comment>
+    </changeSet>
+
+    <changeSet id="create-agrobit-inno-rating-downloads-registry" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-agrobit-inno-rating-downloads-registry.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create Agrobit innovation rating downloads registry table</comment>
+    </changeSet>
+
+    <changeSet id="add-template-agrobit-innovation-rating" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-template-agrobit-innovation-rating.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add notification templates and topic for Agrobit innovation rating download</comment>
+    </changeSet>
+
+</databaseChangeLog>

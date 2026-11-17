@@ -1,0 +1,14 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.content'
+description = 'Content Subsystem Model'
+
+base {
+    archivesName = 'content-model'
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+}

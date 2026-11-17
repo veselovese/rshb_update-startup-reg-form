@@ -1,0 +1,19 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+    id 'jacoco'
+}
+
+group = 'ru.rshb.intech.digital.commons'
+description = 'Commons DTO'
+
+base {
+    archivesName = 'commons-dto'
+}
+
+dependencies {
+
+    implementation project(':subsystem:messages')
+
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation metaLibs.swagger.annotations
+}

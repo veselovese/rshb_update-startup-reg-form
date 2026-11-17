@@ -1,0 +1,19 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.commons'
+
+description = 'Commons Validation'
+
+base {
+    archivesName = 'commons-validation'
+}
+
+dependencies {
+
+    implementation project(':commons:utils')
+
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'jakarta.validation:jakarta.validation-api'
+}

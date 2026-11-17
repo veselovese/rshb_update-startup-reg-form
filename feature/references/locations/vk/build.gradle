@@ -1,0 +1,22 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.locations'
+description = 'Locations VK'
+
+base {
+    archivesName = 'references-locations-vk'
+}
+
+dependencies {
+
+    api project(':subsystem:integrations:vk')
+    api project(':feature:references:locations:api')
+
+    implementation 'org.springframework:spring-context'
+    implementation utilLibs.apache.commons.io
+    implementation 'org.apache.commons:commons-lang3'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

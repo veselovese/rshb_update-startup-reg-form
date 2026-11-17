@@ -1,0 +1,30 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.universities'
+description = 'Universities RAOO Reference Loader'
+
+base {
+    archivesName = 'references-universities-raoo-loader'
+}
+
+dependencies {
+
+    implementation project(':commons:utils')
+    implementation project(':feature:references:universities:core')
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    implementation utilLibs.apache.commons.io
+    implementation 'org.apache.commons:commons-lang3'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.named('test') {
+    it.enabled = false
+}

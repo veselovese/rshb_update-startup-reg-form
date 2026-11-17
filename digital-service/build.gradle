@@ -1,0 +1,123 @@
+plugins {
+    id 'idea'
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.service'
+description = 'Digital Service'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+dependencies {
+
+    implementation project(':feature:contests:chef')
+    implementation project(':feature:contests:stipend')
+    implementation project(':feature:contests:patent')
+    implementation project(':feature:contests:olympiad')
+    implementation project(':feature:feedback:core')
+    implementation project(':feature:innovations:core')
+    implementation project(':feature:internship:core')
+    implementation project(':feature:publications:core')
+    implementation project(':feature:puzzles:core')
+    implementation project(':feature:references:cities:core')
+    implementation project(':feature:references:universities:core')
+    implementation project(':feature:references:universities:vk')
+    implementation project(':feature:references:locations:vk')
+    implementation project(':feature:statistics:forms:core')
+    implementation project(':feature:statistics:agrobit:salary')
+    implementation project(':feature:statistics:agrobit:tourism')
+    implementation project(':feature:statistics:agrobit:university')
+    implementation project(':feature:subscriptions:core')
+    implementation project(':feature:vacancies:core')
+    implementation project(':feature:blogs:core')
+    implementation project(':feature:startups:core')
+    implementation project(':feature:patents:core')
+    implementation project(':feature:downloads:core')
+
+    implementation project(':subsystem:audit:system-log')
+    implementation project(':subsystem:audit:notification-log')
+    implementation project(':subsystem:censor:dictionary')
+    implementation project(':subsystem:censor:forms')
+    implementation project(':subsystem:content:provider:elasticsearch:config')
+    implementation project(':subsystem:events')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:migration:postgres')
+    implementation project(':subsystem:notifications:internal')
+
+    implementation project(':commons:dto')
+    implementation project(':commons:utils')
+    implementation project(':commons:forms')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+
+    implementation 'org.springframework.session:spring-session-core'
+    implementation 'org.springframework.session:spring-session-jdbc'
+    implementation ('org.hibernate.orm:hibernate-core') {
+        version {
+            strictly '6.1.7.Final' // https://github.com/spring-projects/spring-framework/issues/30288
+        }
+    }
+
+    implementation metaLibs.prometeus
+    implementation metaLibs.openapi.starter
+
+    implementation utilLibs.guava
+    implementation utilLibs.bucket4j
+    implementation 'com.github.ben-manes.caffeine:caffeine'
+    implementation utilLibs.apache.commons.io
+    implementation utilLibs.apache.commons.collections4
+
+    implementation logLibs.logback.module.json
+    implementation logLibs.logback.module.jackson
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-batch'
+    testImplementation 'org.springframework.boot:spring-boot-starter-actuator'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.boot:spring-boot-starter-validation'
+    testImplementation testLibs.testcontainers.postgres
+    testImplementation testLibs.testcontainers.jupiter
+}
+
+ext {
+    jarName = 'internship-service'
+    jarVersion = ''
+    springProfile = 'default' // default|dev-stand
+}
+
+springBoot {
+    buildInfo()
+}
+
+tasks.named('test') {
+    it.enabled = false
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar {
+    mainClass.set('ru.rshb.intech.digital.service.DigitalServiceApp')
+    archiveBaseName.set(jarName)
+    archiveVersion.set(jarVersion)
+
+    if (springProfile == 'default') {
+        exclude('static/**')
+    }
+}

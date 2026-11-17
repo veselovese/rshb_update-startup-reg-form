@@ -1,0 +1,25 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+    id 'jacoco'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.locations'
+description = 'Startups Core'
+
+base {
+    archivesName = 'locations-cache'
+}
+
+dependencies {
+
+    api project(':feature:references:locations:api')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+}
+
+test.finalizedBy jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification
+
+test {
+    useJUnitPlatform()
+}

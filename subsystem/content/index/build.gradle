@@ -1,0 +1,19 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.content'
+description = 'Content Index'
+
+base {
+    archivesName = 'content-index'
+}
+
+dependencies {
+
+    api project(':subsystem:content:model')
+
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+    implementation 'jakarta.transaction:jakarta.transaction-api'
+    implementation 'org.springframework.data:spring-data-jpa'
+}

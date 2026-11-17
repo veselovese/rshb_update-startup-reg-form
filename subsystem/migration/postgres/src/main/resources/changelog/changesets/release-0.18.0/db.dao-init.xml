@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="drop-feedback-notification-receivers-table" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/drop-feedback-notification-receivers-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Delete feedback notification receivers table</comment>
+    </changeSet>
+
+    <changeSet id="drop-internship-notification-receivers-table" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/drop-internship-notification-receivers-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Delete internship notification receivers table</comment>
+    </changeSet>
+
+    <changeSet id="add-accelerator-internal-notification-template" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-accelerator-internal-notification-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add Student Accelerator request internal notification template</comment>
+    </changeSet>
+
+    <changeSet id="add-agrocode-internal-notification-template" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-agrocode-internal-notification-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add AgroCode event request internal notification template</comment>
+    </changeSet>
+
+    <changeSet id="add-column-collate-notification-topics" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-column-collate-notification-topics.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add column collate in notification topics table</comment>
+    </changeSet>
+
+    <changeSet id="drop-events-notification-receivers-table" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/drop-events-notification-receivers-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Drop event notifications receivers table</comment>
+    </changeSet>
+
+    <changeSet id="add-chef-internal-notification-template" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-chef-internal-notification-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add Chef participant request notification template</comment>
+    </changeSet>
+
+    <changeSet id="rename-contests-schema" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/rename-contests-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Rename contests schema</comment>
+    </changeSet>
+
+    <changeSet id="rename-internship-schema" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/rename-internship-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Rename internship schema</comment>
+    </changeSet>
+
+    <changeSet id="add-innovations-internal-notification-templates" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-innovations-internal-notification-templates.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add Innovations notification templates</comment>
+    </changeSet>
+
+    <changeSet id="add-crossword-participant-internal-notification-template" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-crossword-participant-internal-notification-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add crossword participant internal notification template</comment>
+    </changeSet>
+
+
+    <changeSet id="create-crossword-counter-tables" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-crossword-counter-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create crossword counter tables</comment>
+    </changeSet>
+
+</databaseChangeLog>

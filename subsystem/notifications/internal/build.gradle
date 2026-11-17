@@ -1,0 +1,23 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.notifications'
+description = 'Internal Notifications Subsystem'
+
+base {
+    archivesName = 'notifications-internal'
+}
+
+dependencies {
+
+    api project(':commons:utils')
+    api project(':subsystem:notifications:api')
+    api project(':subsystem:notifications:mail')
+
+    implementation project(':subsystem:notifications:core')
+    implementation project(':subsystem:notifications:entity')
+
+    implementation 'org.springframework.data:spring-data-jpa'
+    implementation 'org.apache.commons:commons-lang3'
+}

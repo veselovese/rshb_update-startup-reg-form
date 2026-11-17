@@ -1,0 +1,2 @@
+insert into digital_content.shared_files_index (id, external_id, title, url, dnld_limit, ext_notif_templ_id)
+values (4, 'regenerative-agro-study', 'Исследование регенеративного сельского хозйяства', 'https://rshbdigital.ru/img/regenerative-agro-study.pdf', 2, null);

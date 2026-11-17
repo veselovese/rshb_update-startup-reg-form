@@ -1,0 +1,26 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = "ru.rshb.intech.digital.tools"
+description = 'Agrobit Tools'
+
+base {
+    archivesName = 'tools-agrobit'
+}
+
+dependencies {
+
+    implementation project(':subsystem:messages')
+    implementation project(':feature:statistics:agrobit:commons')
+    implementation project(':feature:statistics:agrobit:university')
+    implementation project(':commons:utils')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation utilLibs.apache.poi.ooxml
+    implementation 'org.apache.commons:commons-lang3'
+}
+
+test {
+    useJUnitPlatform()
+}

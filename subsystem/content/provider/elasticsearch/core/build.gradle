@@ -1,0 +1,23 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.content.provider.elasticsearch'
+description = 'Elasticsearch Content Provider'
+
+base {
+    archivesName = 'content-provider-elasticsearch-core'
+}
+
+dependencies {
+
+    api project(':subsystem:content:model')
+    api project(':subsystem:content:provider:api')
+
+    implementation project(':commons:utils')
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.springframework.data:spring-data-elasticsearch'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation utilLibs.apache.commons.collections4
+}

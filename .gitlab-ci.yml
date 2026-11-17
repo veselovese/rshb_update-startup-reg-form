@@ -1,0 +1,87 @@
+stages:
+  - build
+  - deploy
+  - deploy:production
+
+.rules_build:
+  tags:
+    - builder
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ "/(develop|^release\/*|^hotfix\/*|^feature\/*|tags|web)/"'
+      when: manual
+    - if: '$CI_COMMIT_TAG =~ "/^v?(\d+(?:\.\d+)*)$/" && $CI_COMMIT_REF_PROTECTED == "true"'
+      when: always
+    - when: never
+
+
+build:
+  stage: build
+  image: ${CI_REGISTRY}/devops/images/docker-builder:1.0
+  extends: .rules_build
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build --no-cache --build-arg SSH_PRIVATE_KEY="$SSH_PRIVATE_KEY" -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA} -t ${CI_REGISTRY_IMAGE}:latest .;
+      test $CI_COMMIT_TAG && docker tag ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA} ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG};
+      test $CI_COMMIT_TAG && docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG};
+      docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA};
+  when: manual
+  rules:
+    !reference [.rules_build, rules]
+
+
+.deploy-base:
+    image: ${CI_REGISTRY}/dockers/kubectl-client:3.12.1
+    needs:
+        - job: docker-build
+          optional: true
+    script:
+        - export DEPLOY_TIME=$(date '+%Y:%m:%d %H:%M')
+        - export IMAGE_TAG=${CI_COMMIT_SHA}
+        - test $CI_COMMIT_TAG && export IMAGE_TAG=${CI_COMMIT_TAG}
+        - export VAULT_TOKEN="$(vault write -field=token auth/jwt/login role=read-gitlabci-devops-secrets-policy jwt=$CI_JOB_JWT_V1)"
+        - export SERVICE_PASS="$(vault kv get -field=password devops/devops-service)"
+        - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_DEPENDENCY_PROXY_SERVER}/kubernetes/${DOMAIN_K8S}.git
+        - envsubst < ${DOMAIN_K8S}/templates/${CHART}.tmpl > ${DOMAIN_K8S}/charts/${CHART}/${CHART}_${STAND}.yaml
+        - envsubst < ${DOMAIN_K8S}/templates/external-secrets.tmpl > ${DOMAIN_K8S}/charts/external-secrets/secrets_${STAND}.yaml
+        - cd ${DOMAIN_K8S}
+        - git add .
+        - git remote set-url origin https://devops.service:${SERVICE_PASS}@${CI_DEPENDENCY_PROXY_SERVER}/kubernetes/${DOMAIN_K8S}.git
+        - git config --global user.email "devops.service@rshbcloud.ru "
+        - git config --global user.name "DevOps service account"
+        - git commit -am 'update variables'
+        - git push origin master         
+    when: manual
+
+.deploy_prod:
+   extends:
+     - .deploy-base
+   stage: deploy:production
+   tags:
+     - k8s-prod-apps
+   rules:
+    - if: '$CI_COMMIT_TAG =~ "/^v\d+.\d+.\d+/" && $CI_COMMIT_REF_PROTECTED == "true" && $NAMESPACE != "false" && $NAMESPACE != null'
+      when: manual
+    - when: never
+
+
+TEST:
+    stage: deploy
+    variables:
+        STAND: test
+        NAMESPACE: $NAMESPACE_TEST
+        CHART: backend-digital
+    environment: test
+    extends: .deploy-base
+    tags:
+        - kube-dev-apps
+
+PROD:
+  stage: deploy:production
+  extends: 
+    - .deploy_prod
+  environment: prod
+  variables:
+    NAMESPACE: $NAMESPACE_PROD
+    CHART: backend-digital
+    STAND: prod

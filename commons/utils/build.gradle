@@ -1,0 +1,22 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.commons'
+description = 'Commons Untils'
+
+base {
+    archivesName = 'commons-utils'
+}
+
+dependencies {
+
+    implementation project(':subsystem:messages')
+
+    implementation 'org.springframework:spring-web'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation utilLibs.apache.commons.collections4
+    implementation utilLibs.apache.commons.io
+
+    testImplementation 'org.springframework:spring-test'
+}

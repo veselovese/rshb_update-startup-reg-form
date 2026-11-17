@@ -1,0 +1,62 @@
+plugins {
+    id 'java-library'
+    id 'jvm-test-suite'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+group = 'ru.rshb.intech.digital'
+version = '0.40.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+ext {
+    springBootDependenciesBOM = 'org.springframework.boot:spring-boot-dependencies:3.1.5'
+}
+
+dependencies {
+
+    api platform(springBootDependenciesBOM)
+
+    implementation 'jakarta.annotation:jakarta.annotation-api'
+    implementation 'org.slf4j:slf4j-api'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor platform(springBootDependenciesBOM)
+
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.hamcrest:hamcrest'
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testAnnotationProcessor platform(springBootDependenciesBOM)
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2022.0.4"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters' << '-Xlint:deprecation'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

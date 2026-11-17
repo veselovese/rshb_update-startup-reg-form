@@ -1,0 +1,22 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.publications'
+description = 'Publications DTO'
+
+base {
+    archivesName = 'publications-dto'
+}
+
+dependencies {
+
+    implementation project(':commons:dto')
+    implementation project(':subsystem:messages')
+
+    implementation metaLibs.openapi.starter
+}
+
+tasks.named('test') {
+    it.enabled = false
+}

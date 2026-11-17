@@ -1,0 +1,44 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.subscriptions'
+description = 'Subscriptions Core'
+
+base {
+    archivesName = 'subscriptions-core'
+}
+
+dependencies {
+
+    api project(':feature:subscriptions:dto')
+    api project(':feature:subscriptions:entity')
+    api project(':subsystem:notifications:mail')
+
+    implementation project(':commons:dto')
+    implementation project(':commons:utils')
+    implementation project(':feature:publications:dto')
+    implementation project(':feature:statistics:forms:api')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:content:provider:api')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation utilLibs.apache.commons.text
+    implementation utilLibs.apache.commons.collections4
+
+    testImplementation project(':subsystem:migration:postgres')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation testLibs.testcontainers.jupiter
+    testImplementation testLibs.testcontainers.postgres
+}
+
+tasks.named('test') {
+    it.enabled = false
+}
+
+test {
+    useJUnitPlatform()
+}

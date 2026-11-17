@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="alter-vacancies-table" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/alter-vacancies-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Change type of vacancies description and description_html fields</comment>
+    </changeSet>
+
+    <changeSet id="create-agrobit-salary-position-lookups" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-agrobit-salary-position-lookups.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create table for Agrobit average salary statistics</comment>
+    </changeSet>
+
+    <changeSet id="create-agrobit-salary-stats-table" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-agrobit-salary-stats-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create table for Agrobit average salary statistics</comment>
+    </changeSet>
+
+    <changeSet id="create-agrobit-slary-cat-stats-table" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-agrobit-slary-cat-stats-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create table for Agrobit average salary statistics by categories</comment>
+    </changeSet>
+
+</databaseChangeLog>

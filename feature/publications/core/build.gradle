@@ -1,0 +1,31 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.publications'
+description = 'Publications Core'
+
+base {
+    archivesName = 'publications-core'
+}
+
+dependencies {
+
+    api project(':feature:publications:dto')
+    api project(':feature:publications:entity')
+    api project(':subsystem:content:model')
+    api project(':subsystem:content:index')
+    api project(':subsystem:content:provider:api')
+
+    implementation project(':commons:dto')
+    implementation project(':commons:utils')
+    implementation project(':subsystem:messages')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation utilLibs.apache.commons.io
+    implementation utilLibs.apache.commons.collections4
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

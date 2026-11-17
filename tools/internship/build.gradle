@@ -1,0 +1,26 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.tools'
+description = 'Internship Tools'
+
+base {
+    archivesName = 'tools-internship'
+}
+
+dependencies {
+
+    implementation project(':commons:utils')
+    implementation project(':feature:internship:core')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation metaLibs.openapi.starter
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    it.enabled = false
+}

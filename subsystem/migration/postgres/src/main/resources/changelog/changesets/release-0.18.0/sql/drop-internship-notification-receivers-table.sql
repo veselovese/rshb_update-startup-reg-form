@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS internship.o_plt_notification_receiver;

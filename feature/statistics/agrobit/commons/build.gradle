@@ -1,0 +1,20 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.statistics.agrobit'
+description = 'Statistics Agrobit Commons'
+
+base {
+    archivesName = 'statistics-agrobit-commons'
+}
+
+dependencies {
+
+    implementation project(':commons:utils')
+
+    implementation metaLibs.openapi.starter
+
+    testImplementation testLibs.testcontainers.jupiter
+    testImplementation testLibs.testcontainers.postgres
+}

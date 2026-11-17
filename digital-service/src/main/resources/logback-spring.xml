@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Для стендов и продакшена - логи должны быть в формате JSON -->
+    <springProfile name="default,dev-stand">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+                <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                    <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                        <prettyPrint>true</prettyPrint>
+                    </jsonFormatter>
+                    <timestampFormat>yyyy-MM-dd HH:mm:ss.SSS</timestampFormat>
+                    <appendLineSeparator>true</appendLineSeparator>
+                </layout>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <!-- Для локального запуска - логи в более читаемом виде -->
+    <springProfile name="dev-local">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender" >
+        <file>${LOG_DIR}/internship.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>internship-.%d.log</fileNamePattern>
+            <maxHistory>8</maxHistory>
+            <totalSizeCap>160MB</totalSizeCap>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>20MB</maxFileSize>
+        </triggeringPolicy>
+
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter"/>
+                <timestampFormat>yyyy-MM-dd HH:mm:ss.SSS</timestampFormat>
+                <appendLineSeparator>true</appendLineSeparator>
+            </layout>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev-local,dev-stand">
+        <logger name="ru.rshb.intech.digital" level="debug" />
+        <logger name="org.springframework" level="error" />
+    </springProfile>
+
+    <springProfile name="default">
+        <logger name="ru.rshb.intech.digital" level="info" />
+        <logger name="org.springframework" level="info" />
+    </springProfile>
+
+    <logger name="org.springframework.core.LocalVariableTableParameterNameDiscoverer" level="error" /> <!-- Spring known bug -->
+
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>

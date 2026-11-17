@@ -1,0 +1,13 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.messages'
+description = 'Messages Subsystem'
+
+base {
+    archivesName = 'messages'
+}
+
+dependencies {
+}

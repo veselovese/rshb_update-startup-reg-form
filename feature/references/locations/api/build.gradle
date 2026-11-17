@@ -1,0 +1,19 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.locations'
+description = 'Locations API'
+
+base {
+    archivesName = 'references-locations-api'
+}
+
+dependencies {
+
+    api project(':commons:utils')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

@@ -1,0 +1,20 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem'
+description = 'App Events'
+
+base {
+    archivesName = 'subsystem-events'
+}
+
+dependencies {
+
+    implementation project(':subsystem:messages')
+
+    implementation 'org.springframework:spring-context'
+    implementation 'org.apache.commons:commons-lang3'
+
+    testImplementation 'org.springframework:spring-test'
+}

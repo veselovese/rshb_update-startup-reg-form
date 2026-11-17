@@ -1,0 +1,27 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.cities'
+description = 'OKATO Loader Tool'
+
+base {
+    archivesName = 'references-cities-okato-loader'
+}
+
+dependencies {
+
+    implementation project(':commons:utils')
+    implementation project(':feature:references:cities:core')
+
+    implementation utilLibs.apache.commons.io
+    implementation 'org.apache.commons:commons-lang3'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.named('test') {
+    it.enabled = false
+}

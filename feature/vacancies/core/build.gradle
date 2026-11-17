@@ -1,0 +1,30 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.vacancies'
+description = 'Vacancies Core'
+
+base {
+    archivesName = 'vacancies-core'
+}
+
+dependencies {
+
+    api project(':feature:vacancies:hh')
+    api project(':feature:vacancies:model')
+    api project(':feature:vacancies:entity')
+
+    implementation project(':commons:dto')
+    implementation project(':commons:forms')
+    implementation project(':commons:utils')
+    implementation project(':commons:validation')
+    implementation project(':feature:statistics:forms:api')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:censor:forms')
+    implementation project(':subsystem:notifications:internal')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation utilLibs.apache.commons.collections4
+}

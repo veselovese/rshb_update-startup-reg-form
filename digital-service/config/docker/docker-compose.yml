@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  digital-db:
+    container_name: digital-db
+    image: postgres:12.7
+    restart: always
+    volumes:
+      - /var/lib/digital.service/postgresql/data:/var/lib/postgresql/data
+      - /var/lib/digital.service/postgresql/dump:/home/postgres/dump
+    environment:
+      - POSTGRES_USER=digital
+      - POSTGRES_PASSWORD=Dfret45dferet
+      - POSTGRES_DB=digital
+    ports:
+      - "192.168.0.100:5432:5432"

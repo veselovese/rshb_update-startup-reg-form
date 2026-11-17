@@ -1,0 +1,22 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystems.integrations'
+description = 'VK Integration'
+
+base {
+    archivesName = 'subsystem-vk-integration'
+}
+
+dependencies {
+
+    api clientLibs.vk.sdk
+
+    implementation project(':commons:utils')
+
+    implementation project(':subsystem:events')
+    implementation project(':subsystem:audit:system-log')
+
+    implementation 'org.springframework:spring-context'
+}

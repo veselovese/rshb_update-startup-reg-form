@@ -1,0 +1,18 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.migration.postgres'
+description = 'PostgreSQL Migration'
+
+base {
+    archivesName = 'migration-postgres'
+}
+
+dependencies {
+
+    implementation 'org.liquibase:liquibase-core'
+
+    runtimeOnly 'org.postgresql:postgresql'
+    compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
+}

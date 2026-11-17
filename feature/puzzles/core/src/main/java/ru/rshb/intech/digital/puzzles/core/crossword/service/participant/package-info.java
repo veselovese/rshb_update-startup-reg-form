@@ -1,0 +1,1 @@
+package ru.rshb.intech.digital.puzzles.core.crossword.service.participant;

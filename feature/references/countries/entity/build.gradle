@@ -1,0 +1,14 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.countries'
+description = 'Countries Entity'
+
+base {
+    archivesName = 'references-countries-entity'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+}

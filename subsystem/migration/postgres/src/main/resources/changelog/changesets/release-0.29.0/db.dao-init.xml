@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="create-blogs-schema" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-blogs-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create blogs schema</comment>
+    </changeSet>
+
+    <changeSet id="create-blog-experts-tables" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-blog-experts-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create expert tables</comment>
+    </changeSet>
+
+    <changeSet id="create-blog-experts-tables-add-suspicious" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-blog-experts-tables-add-suspicious.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add column suspicious in blog experts registration entry</comment>
+    </changeSet>
+
+    <changeSet id="add-expert-reg-internal-notification-template" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-expert-reg-internal-notification-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add expert registration internal notification email template</comment>
+    </changeSet>
+
+    <changeSet id="add-agrobit-university-stats-tables" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-agrobit-university-stats-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add Agrobit university stats tables</comment>
+    </changeSet>
+
+    <changeSet id="insert-agrobit-university-stats-data" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/insert-agrobit-university-stats-data.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add Agrobit university stats data</comment>
+    </changeSet>
+
+    <changeSet id="alter-expert-registration-table-vk-url-col" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/alter-expert-registration-table-vk-url-col.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Set expert registration field vk_url nullable</comment>
+    </changeSet>
+
+</databaseChangeLog>

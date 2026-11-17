@@ -1,0 +1,198 @@
+server:
+  port: ${SERVER_PORT:8080}
+  #shutdown: graceful
+  forward-headers-strategy: framework
+  error:
+    whitelabel:
+      enabled: false
+
+external:
+  url: ${EXTERNAL_URL:http://localhost:8080}
+
+api:
+  prefix: api/v1/owb-ms-plt-app
+
+
+spring:
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      table-name: digital_system.sessions
+      schema: classpath:/changelog/changesets/release-0.1.0/sql/create-session-tables.sql
+    timeout: -1
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}
+    username: ${DB_USERNAME:}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+  liquibase:
+    change-log: classpath:changelog/db.dao-master.xml
+    default-schema: internship
+    enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        default_schema: internship
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+    show-sql: ${DB_LOGGING_SQL:false}
+  batch:
+    jdbc:
+      table-prefix: digital_system.batch_
+      initialize-schema: always
+      schema: classpath:/changelog/changesets/release-0.16.0/sql/create-batch-tables.sql
+  mail:
+    host: ${MAIL_SMTP_HOST:}
+    port: ${MAIL_SMTP_PORT:457}
+    username: ${MAIL_SMTP_USERNAME:}
+    password: ${MAIL_SMTP_PASSWORD:}
+    default-encoding: UTF-8
+    test-connection: false
+    properties:
+      mail:
+        debug: ${MAIL_DEBUG:false}
+        transport:
+          protocol: smtp
+        smtp:
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          auth: true
+          ssl:
+            enable: true
+          starttls:
+            enable: true
+            required: true
+  task:
+    scheduling:
+      shutdown:
+        await-termination: true
+  web:
+    locale: ru
+  servlet:
+    multipart:
+      max-file-size: ${MAX_ATTACHMENT_SIZE:10485760} # 10 MB
+      resolve-lazily: true
+
+logging:
+  level:
+    ru.rshb.internship: debug
+  file:
+    path: ${LOG_DIR:logs}
+
+attachment:
+  constraint:
+    default:
+      max-size: ${MAX_ATTACHMENT_SIZE:10485760} # 10 MB
+      extensions: ppt,pptx,doc,docx,pdf
+
+template:
+  dir: template/
+  subscription:
+    activation:
+      email: activation-email-template.html
+  statistics:
+    form-usage:
+      email: form-usage-report-email-template.html
+  mailing:
+    news: news-mailing-template.html
+
+notification:
+  scheduling:
+    interval: ${MAIL_SENDING_INTERVAL:5000} # milliseconds
+
+
+
+content:
+  check-delay: 5000 # ms
+  check-interval: ${CONTENT_CHECK_INTERVAL:60000} # ms
+  provider:
+    elasticsearch:
+      username: ${ES_USERNAME:}
+      password: ${ES_PASSWORD:}
+      host: ${ES_HOST:10.80.1.26}
+      port: ${ES_PORT:9200}
+    gitlab:
+      url: ${GITLAB_URL}
+      token: ${GITLAB_TOKEN}
+      content:
+        namespace: ${GITLAB_CONTENT_NAMEPSACE:Digital}
+        repository: ${GITLAB_CONTENT_REPOSITORY:rshb-digital}
+        branch: ${GITLAB_CONTENT_BRANCH:master}
+        path:
+          articles: ${GITLAB_ARTICLES_PATH:content/articles}
+          podcasts: ${GITLAB_PODCASTS_PATH:content/podcast}
+          events: ${GITLAB_EVENTS_PATH:content/events}
+          crosswords: ${GITLAB_CROSSWORDS_PATH:content/crossword}
+          innovation: ${GITLAB_INNOVATION_PATH:content/innovation}
+          infographics: ${GITLAB_INFOGRAPHICS_PATH:content/infographic}
+          books: ${GITLAB_BOOKS_PATH:content/books}
+          lectures: ${GITLAB_LECTURES_PATH:content/lectures}
+
+statistics:
+  collection:
+    form-requests:
+      enabled: ${STATS_FORM_REQUESTS_COLLECTION_ENABLED:true}
+      cron: ${STATS_FORM_REQUESTS_CRON:0 0 6 * * MON}
+
+management:
+  health:
+    mail:
+      enabled: false # disables email check on startup
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+      distribution:
+        percentiles-histogram:
+          "[http.server.requests]": true
+  server:
+    port: ${ACTUATOR_PORT:8081}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+    enabled: ${SWAGGER_ENABLED:true}
+
+feedback:
+  report:
+    max-number: ${FEEDBACK_MAX_NUMBER:3}
+    interval-hours: ${FEEDBACK_INTERVAL_HOURS:48}
+
+request:
+  limits:
+    feedback:
+      report:
+        max-number: ${FEEDBACK_MAX_NUMBER:3}
+        interval-hours: ${FEEDBACK_INTERVAL_HOURS:48}
+
+subscriptions:
+  sender:
+    title: ${SUBSCRIPTIONS_SENDER_TITLE:RSHB DIGITAL}
+  digest:
+    collection:
+      cron: ${SUBSCRIPTIONS_DIGEST_COLLECTION_CRON:0 0 7 * * SUN}
+    limits:
+      news: ${SUBSCRIPTIONS_DIGEST_NEWS_LIMIT:5}
+      events: ${SUBSCRIPTIONS_DIGEST_EVENTS_LIMIT:5}
+      podcasts: ${SUBSCRIPTIONS_DIGEST_PODCASTS_LIMIT:100}
+
+hh:
+  sync:
+    enabled: ${HH_SYNC_ENABLED:true}
+    interval: ${HH_VACANCIES_CHECK_INTERVAL:86400000}
+  user-agent: RshbDigital/1.0 (trainee.request@yandex.ru)
+  auth:
+    client-id: ${HH_RSHB_INTECH_CLIENT_ID}
+    client-secret: ${HH_RSHB_INTECH_CLIENT_SECRET}
+    default-token: ${HH_RSHB_INTECH_DEFAULT_TOKEN:}

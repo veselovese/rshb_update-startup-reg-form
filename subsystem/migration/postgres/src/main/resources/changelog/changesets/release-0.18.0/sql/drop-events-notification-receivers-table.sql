@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS digital_events.o_plt_notification_receivers;
+DROP TABLE IF EXISTS digital_events.o_plt_agrocode_mailing_receivers;

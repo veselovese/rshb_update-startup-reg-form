@@ -1,0 +1,21 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.universities'
+description = 'Universities Reference Core'
+
+base {
+    archivesName = 'references-universities-core'
+}
+
+dependencies {
+
+    api project(':feature:references:universities:dto')
+    api project(':feature:references:universities:entity')
+
+    implementation 'org.apache.commons:commons-lang3'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+}

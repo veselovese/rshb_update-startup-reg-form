@@ -1,0 +1,20 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.censor'
+description = 'Censor Dictionary'
+
+base {
+    archivesName = 'censor-dictionary'
+}
+
+dependencies {
+
+    api project(':subsystem:censor:api')
+
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework.data:spring-data-jpa'
+    implementation 'org.apache.commons:commons-lang3'
+}

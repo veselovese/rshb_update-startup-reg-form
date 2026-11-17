@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="create-digital-system-schema" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-digital-system-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create digital_system schema</comment>
+    </changeSet>
+
+    <changeSet id="create-digital-publications-schema" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-digital-publications-schema.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create digital_publications schema</comment>
+    </changeSet>
+
+    <changeSet id="create-post-likes-table" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-post-likes-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create publications likes table</comment>
+    </changeSet>
+
+    <changeSet id="create-post-views-table" author="boris.kuznetsov">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-post-views-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create publications views table</comment>
+    </changeSet>
+
+</databaseChangeLog>

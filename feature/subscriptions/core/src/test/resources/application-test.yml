@@ -1,0 +1,129 @@
+server:
+  port: ${SERVER_PORT:8080}
+  #shutdown: graceful
+  forward-headers-strategy: framework
+  error:
+    whitelabel:
+      enabled: false
+
+external:
+  url: ${EXTERNAL_URL:http://localhost:8080}
+
+api:
+  prefix: api/v1/owb-ms-plt-app
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      table-name: digital_system.sessions
+      schema: classpath:/changelog/changesets/release-0.1.0/sql/create-session-tables.sql
+    timeout: -1
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+  liquibase:
+    change-log: classpath:changelog/db.dao-master.xml
+    default-schema: internship
+    enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        default_schema: internship
+    hibernate:
+      ddl-auto: none
+    show-sql: ${DB_LOGGING_SQL:false}
+  mail:
+    host: ${MAIL_SMTP_HOST:}
+    port: ${MAIL_SMTP_PORT:}
+    username: ${MAIL_SMTP_USERNAME:}
+    password: ${MAIL_SMTP_PASSWORD:}
+    default-encoding: UTF-8
+    test-connection: false
+    properties:
+      mail:
+        debug: ${MAIL_DEBUG:true}
+        transport:
+          protocol: smtp
+        smtp:
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          auth: true
+          ssl:
+            enable: true
+          starttls:
+            enable: true
+            required: true
+  task:
+    scheduling:
+      shutdown:
+        await-termination: true
+
+logging:
+  level:
+    org.springframework: error
+    ru.rshb.internship: debug
+  file:
+    path: ${LOG_DIR:logs}
+
+attachment:
+  constraint:
+    max-size: ${MAX_ATTACHMENT_SIZE:10485760} # 10 MB
+
+notification:
+  scheduling:
+    interval: ${MAIL_SENDING_INTERVAL:5000} # milliseconds
+
+gitlab:
+  url: ${GITLAB_URL}
+  token: ${GITLAB_TOKEN}
+  content:
+    namespace: ${GITLAB_CONTENT_NAMEPSACE:Digital}
+    repository: ${GITLAB_CONTENT_REPOSITORY:rshb-digital}
+    branch: ${GITLAB_CONTENT_BRANCH:master}
+    path:
+      articles: ${GITLAB_ARTICLES_PATH:content/articles}
+      podcasts: ${GITLAB_PODCASTS_PATH:content/podcast}
+      crosswords: ${GITLAB_CROSSWORDS_PATH:content/crossword}
+
+content:
+  check-delay: 5000 # ms
+  check-interval: ${CONTENT_CHECK_INTERVAL:60000} # ms
+
+management:
+  health:
+    mail:
+      enabled: false # disables email check on startup
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+      distribution:
+        percentiles-histogram:
+          "[http.server.requests]": true
+  server:
+    port: ${ACTUATOR_PORT:8081}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+    enabled: ${SWAGGER_ENABLED:true}
+
+feedback:
+  report:
+    max-number: ${FEEDBACK_MAX_NUMBER:3}
+    interval-hours: ${FEEDBACK_INTERVAL_HOURS:48}

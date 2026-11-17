@@ -1,0 +1,14 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.cities'
+description = 'Cities Reference Entity'
+
+base {
+    archivesName = 'references-cities-entity'
+}
+
+dependencies {
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+}

@@ -1,0 +1,18 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.subscriptions'
+description = 'Subscriptions DTO'
+
+base {
+    archivesName = 'subscriptions-dto'
+}
+
+dependencies {
+
+    implementation project(':subsystem:messages')
+
+    implementation utilLibs.apache.commons.collections4
+    implementation metaLibs.openapi.starter
+}

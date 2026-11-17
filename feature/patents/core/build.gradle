@@ -1,0 +1,36 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+    id 'jacoco'
+}
+
+group = 'ru.rshb.intech.digital.feature.patents'
+description = 'Patents Core'
+
+base {
+    archivesName = 'patents-core'
+}
+
+dependencies {
+
+    api metaLibs.swagger.annotations
+
+    implementation project(':commons:utils')
+    implementation project(':commons:forms')
+    implementation project(':commons:validation')
+    implementation project(':feature:contests:patent')
+    implementation project(':feature:references:cities:core')
+    implementation project(':subsystem:censor:forms')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:notifications:internal')
+
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+    implementation 'jakarta.transaction:jakarta.transaction-api'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework.data:spring-data-jpa'
+    implementation 'org.apache.commons:commons-lang3'
+}
+
+test.finalizedBy jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification

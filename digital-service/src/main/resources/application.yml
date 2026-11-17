@@ -1,0 +1,212 @@
+################### SYSTEM PROPERTIES ###################
+
+application:
+  title: RSHB Digital Service
+
+server:
+  port: ${SERVER_PORT:8080}
+  #shutdown: graceful
+  forward-headers-strategy: framework
+  error:
+    whitelabel:
+      enabled: false
+  servlet:
+    session:
+      timeout: ${SERVER_SESSION_TTL:60d}
+      cookie:
+        http-only: true
+      tracking-modes: cookie
+
+external:
+  url: ${EXTERNAL_URL:http://localhost:8080}
+
+api:
+  prefix: api/v1/owb-ms-plt-app
+  external:
+    prefix: api/v1/owb-ms-plt-app
+  internal:
+    prefix: api/v1/internal
+
+digital:
+  agrobit:
+    datasource:
+      url: jdbc:postgresql://${DB_AGROBIT_HOST}:${DB_AGROBIT_PORT:5432}/${DB_AGROBIT_NAME}
+      username: ${DB_AGROBIT_USERNAME}
+      password: ${DB_AGROBIT_PASSWORD}
+      driver-class-name: org.postgresql.Driver
+
+spring:
+  session:
+    jdbc:
+      initialize-schema: always
+      table-name: digital_system.sessions
+      schema: classpath:/changelog/changesets/release-0.1.0/sql/create-session-tables.sql
+      cleanup-cron: 0 */5 * * * *
+      flush-mode: immediate # Необходимо для корректной работы лайков и просмотров
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT:5432}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+  liquibase:
+    change-log: classpath:changelog/db.dao-master.xml
+    enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+    show-sql: ${DB_LOGGING_SQL:false}
+    open-in-view: false
+  batch:
+    jdbc:
+      table-prefix: digital_system.batch_
+      initialize-schema: always
+      schema: classpath:/changelog/changesets/release-0.22.0/sql/create-batch-schema.sql
+      isolation-level-for-create: serializable
+  mail:
+    host: ${MAIL_SMTP_HOST}
+    port: ${MAIL_SMTP_PORT}
+    username: ${MAIL_SMTP_USERNAME}
+    password: ${MAIL_SMTP_PASSWORD}
+    default-encoding: UTF-8
+    test-connection: false
+    properties:
+      mail:
+        debug: ${MAIL_DEBUG:false}
+        transport:
+          protocol: smtp
+        smtp:
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          auth: true
+          ssl:
+            enable: true
+          starttls:
+            enable: true
+            required: true
+  task:
+    scheduling:
+      shutdown:
+        await-termination: true
+  web:
+    locale: ru
+  servlet:
+    multipart:
+      max-file-size: ${MAX_ATTACHMENT_SIZE:20971520} # 20 MB
+      max-request-size: ${MAX_REQUEST_SIZE:41943040} # 40 MB
+      resolve-lazily: true
+  profiles:
+    active: ${ACTIVE_PROFILE:default}
+
+logging:
+  charset:
+    console: UTF-8
+    file: UTF-8
+  file:
+    path: ${LOG_DIR:logs}
+  config: classpath:logback-spring.xml
+
+management:
+  health:
+    mail:
+      enabled: false # disables email check on startup
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  metrics:
+    export:
+      distribution:
+        percentiles-histogram:
+          "[http.server.requests]": true
+  server:
+    port: ${ACTUATOR_PORT:8081}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: method
+    enabled: ${SWAGGER_ENABLED:false}
+    try-it-out-enabled: ${SWAGGER_ENABLED:false}
+
+################### BL PROPERTIES ###################
+
+attachments:
+  allowed-extensions: ppt,pptx,doc,docx,pdf
+
+content:
+  check-delay: 5000 # ms
+  check-interval: ${CONTENT_CHECK_INTERVAL:60000} # ms
+  provider:
+    elasticsearch:
+      host: ${ES_HOST}
+      port: ${ES_PORT:9200}
+      username: ${ES_USERNAME:}
+      password: ${ES_PASSWORD:}
+
+statistics:
+  collection:
+    enabled: ${STATS_COLLECTION_ENABLED:true}
+    cron: ${STATS_COLLECTION_CRON:0 0 6 * * *}
+    agrobit:
+      tourism:
+        enabled: ${STATS_AGROBIT_TOURISM_COLLECTION_ENABLED:true}
+      salary:
+        enabled: ${STATS_AGROBIT_SALARY_COLLECTION_ENABLED:true}
+    form-requests:
+      enabled: ${STATS_FORM_REQUESTS_COLLECTION_ENABLED:true}
+      cron: ${STATS_FORM_REQUESTS_CRON:0 0 6 * * MON}
+    internship:
+      registration:
+        enabled: ${STATS_INTERNSHIP_REG_COLLECTION_ENABLED:true}
+        cron: ${STATS_INTERNSHIP_REG_CRON:0 0 6 * * ?}
+
+request:
+  limits:
+    feedback:
+      report:
+        max-number: ${FEEDBACK_MAX_NUMBER:3}
+        interval-hours: ${FEEDBACK_INTERVAL_HOURS:48}
+
+subscriptions:
+  sender:
+    title: ${SUBSCRIPTIONS_SENDER_TITLE:RSHB DIGITAL}
+  digest:
+    collection:
+      cron: ${SUBSCRIPTIONS_DIGEST_COLLECTION_CRON:0 0 7 * * SUN}
+    limits:
+      news: ${SUBSCRIPTIONS_DIGEST_NEWS_LIMIT:5}
+      events: ${SUBSCRIPTIONS_DIGEST_EVENTS_LIMIT:5}
+      podcasts: ${SUBSCRIPTIONS_DIGEST_PODCASTS_LIMIT:100}
+
+vacancies:
+  collection:
+    enabled: ${HH_SYNC_ENABLED:true}
+    cron: ${HH_SYNC_CRON:0 15 6 * * *}
+
+integrations:
+  hh:
+    user-agent: ${HH_RSHB_USER_AGENT:RshbDigital/1.0 (trainee.request@yandex.ru)}
+    auth:
+      client-id: ${HH_RSHB_INTECH_CLIENT_ID}
+      client-secret: ${HH_RSHB_INTECH_CLIENT_SECRET}
+      default-token: ${HH_RSHB_INTECH_DEFAULT_TOKEN:}
+  vk:
+    auth:
+      app-id: ${VK_APP_ID}
+      secure-key: ${VK_APP_KEY}
+      service-token: ${VK_APP_SERVICE_TOKEN:}
+  digital-farm:
+    base-url: ${DIGITAL_FARM_BASE_URL}

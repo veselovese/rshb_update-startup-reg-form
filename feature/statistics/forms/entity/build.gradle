@@ -1,0 +1,30 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+    id 'jacoco'
+}
+
+group = 'ru.rshb.intech.digital.feature.statistics.forms'
+description = 'Form Usage Statistics Entity'
+
+base {
+    archivesName = 'statistics-forms-entity'
+}
+
+dependencies {
+
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation project(':subsystem:messages')
+    implementation 'org.apache.commons:commons-lang3'
+    implementation utilLibs.apache.commons.collections4
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation utilLibs.guava
+}
+
+test.finalizedBy jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification
+
+test {
+    useJUnitPlatform()
+}

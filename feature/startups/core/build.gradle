@@ -1,0 +1,41 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+    id 'jacoco'
+}
+
+group = 'ru.rshb.intech.digital.feature.startups'
+description = 'Startups Core'
+
+base {
+    archivesName = 'startups-core'
+}
+
+dependencies {
+
+    implementation project(':commons:dto')
+    implementation project(':commons:forms')
+    implementation project(':commons:utils')
+    implementation project(':commons:validation')
+    implementation project(':feature:references:locations:vk')
+    implementation project(':feature:references:locations:cache')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:censor:forms')
+    implementation project(':subsystem:notifications:internal')
+    implementation project(':subsystem:audit:system-log')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation metaLibs.openapi.starter
+    implementation utilLibs.apache.poi.ooxml
+
+    testImplementation project(':commons:forms')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation utilLibs.guava
+}
+
+test.finalizedBy jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification
+
+test {
+    useJUnitPlatform()
+}

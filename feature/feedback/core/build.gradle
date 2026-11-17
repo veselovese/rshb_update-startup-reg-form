@@ -1,0 +1,37 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+    id 'jacoco'
+}
+
+group = 'ru.rshb.intech.digital.feature.feedback'
+description = 'Feedback Core'
+
+base {
+    archivesName = 'feedback-core'
+}
+
+dependencies {
+
+    api metaLibs.swagger.annotations
+
+    implementation project(':commons:forms')
+    implementation project(':commons:utils')
+    implementation project(':commons:validation')
+
+    implementation project(':feature:statistics:forms:api')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:censor:forms')
+    implementation project(':subsystem:notifications:internal')
+
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+    implementation 'jakarta.transaction:jakarta.transaction-api'
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework.data:spring-data-jpa'
+    implementation 'org.apache.commons:commons-lang3'
+
+    testImplementation 'org.springframework:spring-test'
+}
+
+test.finalizedBy jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification

@@ -1,0 +1,21 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.notifications'
+description = 'Mail Notifications Subsystem'
+
+base {
+    archivesName = 'notifications-mail'
+}
+
+dependencies {
+
+    api project(':subsystem:notifications:core')
+
+    implementation 'org.apache.commons:commons-lang3'
+
+    implementation 'org.thymeleaf:thymeleaf'
+    implementation 'org.eclipse.angus:jakarta.mail'
+    implementation 'org.springframework:spring-context-support'
+}

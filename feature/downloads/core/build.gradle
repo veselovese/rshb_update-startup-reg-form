@@ -1,0 +1,34 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+    id 'jacoco'
+}
+
+group = 'ru.rshb.intech.digital.feature.downloads'
+description = 'Downloads Core'
+
+base {
+    archivesName = 'downloads-core'
+}
+
+dependencies {
+
+    api metaLibs.swagger.annotations
+
+    implementation project(':commons:forms')
+    implementation project(':commons:validation')
+    implementation project(':subsystem:messages')
+    implementation project(':subsystem:censor:forms')
+    implementation project(':subsystem:content:files')
+    implementation project(':subsystem:notifications:internal')
+
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+    implementation 'jakarta.transaction:jakarta.transaction-api'
+    implementation 'org.springframework.data:spring-data-jpa'
+
+    testImplementation 'ch.qos.logback:logback-classic'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test.finalizedBy jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification

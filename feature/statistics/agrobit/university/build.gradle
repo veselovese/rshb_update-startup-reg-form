@@ -1,0 +1,27 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = "ru.rshb.intech.digital.feature.statistics.agrobit"
+description = 'Statistics Agrobit University'
+
+base {
+    archivesName = 'statistics-agrobit-university'
+}
+
+dependencies {
+
+    api project(':subsystem:messages')
+    api project(':feature:statistics:agrobit:commons')
+
+    implementation project(':commons:utils')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation metaLibs.openapi.starter
+    implementation utilLibs.apache.poi.ooxml
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="add-internship-registration-columns" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-internship-registration-columns.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add internship registration columns</comment>
+    </changeSet>
+
+    <changeSet id="add-university-table" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-university-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add universities reference table</comment>
+    </changeSet>
+
+    <changeSet id="add-education-stage-ref-table" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-education-stage-ref-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add education stages reference table</comment>
+    </changeSet>
+
+    <changeSet id="add-okato-cities-ref-table" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-okato-cities-ref-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add OKATO cities reference table</comment>
+    </changeSet>
+
+    <changeSet id="fill-okato-cities-ref-tables" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/fill-okato-cities-ref-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Fill OKATO cities reference table with default values</comment>
+    </changeSet>
+
+    <changeSet id="fill-raoo-university-ref-table" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/fill-raoo-university-ref-table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Fill RAOO universities reference table with default values</comment>
+    </changeSet>
+
+    <changeSet id="update-internship-registraion-notification-template" author="b.k">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/update-internship-registraion-notification-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Update internship registration notification email template</comment>
+    </changeSet>
+
+</databaseChangeLog>

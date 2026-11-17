@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="create-table-publication-index" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-table-publication-index.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create publication index table</comment>
+    </changeSet>
+
+    <changeSet id="create-table-notification-templates" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/create-table-notification-templates.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Create email templates table</comment>
+    </changeSet>
+
+    <changeSet id="add-internship-applicant-notification-template" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-internship-applicant-notification-template.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add internship applicant notification email template</comment>
+    </changeSet>
+
+    <changeSet id="update-email-templates" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/update-email-templates.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Update email templates for subscription activation and internship applicant notification</comment>
+    </changeSet>
+
+    <changeSet id="add-subscription-email-templates" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/add-subscription-email-templates.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Update email templates for subscription</comment>
+    </changeSet>
+
+    <changeSet id="alter-topics-add-fk" author="b.k.">
+        <validCheckSum>any</validCheckSum>
+        <sqlFile path="sql/alter-topics-add-fk.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="false"
+        />
+        <comment>Add FK for template_id in topics table</comment>
+    </changeSet>
+
+</databaseChangeLog>

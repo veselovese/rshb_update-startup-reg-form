@@ -1,0 +1,24 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.notifications'
+description = 'Core Notifications Lib'
+
+base {
+    archivesName = 'notifications-core'
+}
+
+dependencies {
+
+    api project(':subsystem:notifications:api')
+    api project(':subsystem:notifications:entity')
+
+    implementation project(':subsystem:events')
+    implementation project(':subsystem:audit:system-log')
+    implementation project(':subsystem:audit:notification-log')
+
+    implementation 'org.springframework.data:spring-data-jpa'
+
+    testImplementation 'org.springframework:spring-web'
+}

@@ -1,0 +1,18 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.cities'
+description = 'Cities Reference DTO'
+
+base {
+    archivesName = 'references-cities-dto'
+}
+
+dependencies {
+
+    implementation project(':commons:dto')
+    implementation project(':subsystem:messages')
+
+    implementation metaLibs.openapi.starter
+}

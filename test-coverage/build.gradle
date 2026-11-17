@@ -1,0 +1,25 @@
+plugins {
+    id 'base'
+    id 'jacoco-report-aggregation'
+}
+
+group = 'ru.rshb.intech.digital.test'
+description = 'Test Coverage Analysis Module'
+
+dependencies {
+    jacocoAggregation project(':feature:downloads:core')
+    jacocoAggregation project(':feature:feedback:core')
+    jacocoAggregation project(':feature:internship:core')
+}
+
+reporting {
+    reports {
+        testCodeCoverageReport(JacocoCoverageReport) {
+            testType = TestSuiteType.UNIT_TEST
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('testCodeCoverageReport', JacocoReport)
+}

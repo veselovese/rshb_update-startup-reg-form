@@ -1,0 +1,33 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.vacancies'
+description = 'HeadHunter Integration'
+
+base {
+    archivesName = 'vacancies-hh'
+}
+
+dependencies {
+
+    implementation project(':feature:vacancies:model')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation metaLibs.openapi.starter
+
+    testImplementation project(':subsystem:migration:postgres')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation testLibs.testcontainers.jupiter
+    testImplementation testLibs.testcontainers.postgres
+    testImplementation utilLibs.apache.commons.collections4
+}
+
+tasks.named('test') {
+    it.enabled = false
+}
+
+test {
+    useJUnitPlatform()
+}

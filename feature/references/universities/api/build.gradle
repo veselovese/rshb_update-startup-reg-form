@@ -1,0 +1,14 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.references.universities'
+description = 'Universities Reference API'
+
+base {
+    archivesName = 'references-universities-api'
+}
+
+dependencies {
+    api project(':commons:utils')
+}

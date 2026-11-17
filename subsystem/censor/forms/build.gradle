@@ -1,0 +1,19 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.subsystem.censor'
+description = 'Censor Forms'
+
+base {
+    archivesName = 'censor-forms'
+}
+
+dependencies {
+
+    api project(':subsystem:censor:api')
+
+    implementation project(':commons:forms')
+
+    implementation 'org.apache.commons:commons-lang3'
+}

@@ -1,0 +1,16 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.publications'
+description = 'Publications Entity'
+
+base {
+    archivesName = 'publications-entity'
+}
+
+dependencies {
+
+    implementation project(':feature:publications:dto')
+    implementation 'jakarta.persistence:jakarta.persistence-api'
+}

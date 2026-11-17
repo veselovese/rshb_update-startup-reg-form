@@ -1,0 +1,14 @@
+plugins {
+    id 'ru.rshb.intech.digital.java-conventions'
+}
+
+group = 'ru.rshb.intech.digital.feature.statistics'
+description = 'Statistics Entity'
+
+base {
+    archivesName = 'statistics-entity'
+}
+
+dependencies {
+    implementation project(':subsystem:messages')
+}

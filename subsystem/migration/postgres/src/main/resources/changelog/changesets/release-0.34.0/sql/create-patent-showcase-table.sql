@@ -1,0 +1,28 @@
+create table digital_contests.patent_showcase_regs
+(
+    id                 bigint generated always as identity primary key,
+    submit_date        timestamp     not null,
+    appl_name          varchar(255)  not null,
+    position           varchar(100)  null,
+    org                varchar(100)  null,
+    proj_name          varchar(255)  not null,
+    proj_stage         varchar(100)  not null,
+    pat_reg_num        varchar(100)  not null,
+    pat_reg_year       int           not null,
+    pat_mpk            varchar(100)  not null,
+    pat_holder         varchar(100)  not null,
+    invent_descr_short varchar(300)  not null,
+    invent_descr_full  varchar(3000) not null,
+    mng_subj           varchar(100)  not null,
+    email              varchar(254)  not null,
+    phone              varchar(15)   not null,
+    com_impl           varchar(100)  not null,
+    site_url           varchar(2048) null,
+    invest_amnt        varchar(30)   null,
+    fin_round          varchar(100)  not null,
+    clients_amount     varchar(100)  not null,
+    staff_size         int           null,
+    victories          varchar(255)  null,
+    city_id            varchar(50)   not null,
+    suspicious         bool          not null default false
+);
