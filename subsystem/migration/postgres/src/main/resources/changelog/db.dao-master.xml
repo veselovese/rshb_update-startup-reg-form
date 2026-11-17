@@ -40,5 +40,6 @@
     <include file="/changelog/changesets/release-0.38.0/db.dao-init.xml"/>
     <include file="/changelog/changesets/release-0.39.0/db.dao-init.xml"/>
     <include file="/changelog/changesets/release-0.40.0/db.dao-init.xml"/>
+    <include file="/changelog/changesets/release-0.41.0/db.dao-init.xml"/>
 
 </databaseChangeLog>

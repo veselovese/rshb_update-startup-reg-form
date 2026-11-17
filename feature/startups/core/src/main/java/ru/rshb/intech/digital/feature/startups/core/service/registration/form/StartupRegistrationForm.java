@@ -44,10 +44,8 @@ public class StartupRegistrationForm extends Form<StartupRegistrationDto, Startu
   @Nonnull
   @Override
   public StartupRegistration process(@Nonnull StartupRegistrationDto inputData) {
-
     final var attachments = Attachments.list()
-        .ofNonNull(inputData.getAttachmentLogo(), registrationService.getLogoAllowedExtensions())
-        .ofNullable(inputData.getAttachmentPresentation(), registrationService.getPresentationAllowedExtensions())
+        .ofNullable(inputData.getAttachmentLogo(), registrationService.getLogoAllowedExtensions())
         .collectNonNull();
 
     return process(

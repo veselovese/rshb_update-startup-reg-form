@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 public class StartupRegistrationServiceImpl implements StartupRegistrationService {
 
   private static final String[] ALLOWED_LOGO_EXTENSIONS = {"svg", "eps", "png"};
-  private static final String[] ALLOWED_PRESENTATION_EXTENSIONS = {"ppt", "pptx", "doc", "docx", "pdf"};
 
   private final StartupRegistrationRepository registrationRepository;
 
@@ -34,11 +33,5 @@ public class StartupRegistrationServiceImpl implements StartupRegistrationServic
   @Override
   public String[] getLogoAllowedExtensions() {
     return ALLOWED_LOGO_EXTENSIONS;
-  }
-
-  @Nonnull
-  @Override
-  public String[] getPresentationAllowedExtensions() {
-    return ALLOWED_PRESENTATION_EXTENSIONS;
   }
 }

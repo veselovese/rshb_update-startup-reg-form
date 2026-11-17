@@ -62,6 +62,10 @@ public class StartupRegistrationController {
   @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   @Transactional
   public OperationResultResponse postRegistration(@Valid @ModelAttribute StartupRegistrationDto formData) {
+    return processRegistration(formData);
+  }
+
+  private OperationResultResponse processRegistration(StartupRegistrationDto formData) {
     startupRegistrationForm.process(formData);
     return localizedSuccess("common.info.message.application.accepted");
   }

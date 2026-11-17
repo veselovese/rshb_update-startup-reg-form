@@ -16,7 +16,7 @@ import ru.rshb.intech.digital.feature.startups.entity.StartupRegistration;
 public class InvestmentsValue extends LongAttributeBase<StartupRegistrationDto, StartupRegistration> {
 
   public static final String TITLE_KEY = "startups.registration.attr.investments.value.name";
-  private static final long MIN_VALUE = 99;
+  private static final long MIN_VALUE = 0;
   private static final long MAX_VALUE = 999_999_999_999L;
 
   public InvestmentsValue() {

@@ -10,8 +10,4 @@ public interface StartupRegistrationService {
 
   @Nonnull
   String[] getLogoAllowedExtensions();
-
-  @Nonnull
-  String[] getPresentationAllowedExtensions();
-
 }

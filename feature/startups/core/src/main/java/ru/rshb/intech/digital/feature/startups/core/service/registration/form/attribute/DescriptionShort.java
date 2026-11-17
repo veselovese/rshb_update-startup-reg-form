@@ -17,7 +17,7 @@ import ru.rshb.intech.digital.feature.startups.entity.StartupRegistration;
 public class DescriptionShort extends TextAttributeBase<StartupRegistrationDto, StartupRegistration> {
 
   public static final String TITLE_KEY = "startups.registration.attr.description.short.name";
-  private static final int MAX_LENGTH = 70;
+  private static final int MAX_LENGTH = 300;
 
   public DescriptionShort() {
     super(TITLE_KEY, MAX_LENGTH);

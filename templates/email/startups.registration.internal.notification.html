@@ -83,11 +83,6 @@
             <td th:text="${organization}"/>
         </tr>
 
-        <tr th:if="${position != null && !position.isBlank()}">
-            <th scope="row">Должность</th>
-            <td th:text="${position}"/>
-        </tr>
-
         <tr>
             <th scope="row">Контактный телефон</th>
             <td th:text="${phone}"/>
@@ -98,24 +93,24 @@
             <td th:text="${email}"/>
         </tr>
 
-        <tr th:if="${vkProfileUrl != null && !vkProfileUrl.isBlank()}">
-            <th scope="row">Профиль VK</th>
-            <td th:text="${vkProfileUrl}"/>
-        </tr>
-
         <tr>
             <th scope="row">Наименование проекта</th>
             <td th:text="${projectName}"/>
         </tr>
 
         <tr>
-            <th scope="row">Страна</th>
-            <td th:text="${country}" />
-        </tr>
-
-        <tr>
             <th scope="row">Город</th>
             <td th:text="${city}" />
+        </tr>
+
+        <tr th:if="${inn != null && !inn.isBlank()}">
+            <th scope="row">ИНН</th>
+            <td th:text="${inn}"/>
+        </tr>
+
+        <tr th:if="${websiteUrl != null && !websiteUrl.isBlank()}">
+            <th scope="row">Сайт проекта</th>
+            <td th:text="${websiteUrl}"/>
         </tr>
 
         <tr>
@@ -130,24 +125,27 @@
 
         <tr th:if="${investValue != null}">
             <th scope="row">Объем инвестиций</th>
-            <td>
-                <span th:text="${investValue}" />&nbsp;<span th:text="${investCurr}" />
-            </td>
+            <td th:text="${investValue}"/>
         </tr>
 
-        <tr th:if="${category != null}">
-            <th scope="row">Категория</th>
-            <td th:text="${category}" />
+        <tr th:if="${investorName != null && !investorName.isBlank()}">
+            <th scope="row">Инвестор</th>
+            <td th:text="${investorName}"/>
+        </tr>
+
+        <tr>
+            <th scope="row">Выручка за прошлый год</th>
+            <td th:text="${revenueRange}"/>
+        </tr>
+
+        <tr>
+            <th scope="row">Категории проекта</th>
+            <td th:text="${categories}"/>
         </tr>
 
         <tr>
             <th scope="row">Год основания стартапа</th>
             <td th:text="${foundedYear}" />
-        </tr>
-
-        <tr th:if="${staffSize != null}">
-            <th scope="row">Кол-во сотрудников</th>
-            <td th:text="${staffSize}" />
         </tr>
 
         <tr>
@@ -156,13 +154,13 @@
         </tr>
 
         <tr>
-            <th scope="row">Кол-во клиентов</th>
-            <td th:text="${clientsNumber}" />
+            <th scope="row">Решения с ИИ</th>
+            <td th:text="${hasAiSolutions}"/>
         </tr>
 
-        <tr>
-            <th scope="row">Раунд финансирования</th>
-            <td th:text="${finRound}" />
+        <tr th:if="${videoUrl != null && !videoUrl.isBlank()}">
+            <th scope="row">Видео о проекте</th>
+            <td th:text="${videoUrl}"/>
         </tr>
 
         </tbody>

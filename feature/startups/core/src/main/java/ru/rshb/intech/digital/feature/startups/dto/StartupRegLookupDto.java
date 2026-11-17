@@ -15,16 +15,10 @@ public record StartupRegLookupDto (
     @Schema(description = "Стадии проекта")
     List<LookupValueDto> projectStage,
 
-    @Schema(description = "Варианты количества клиентов")
-    List<LookupValueDto> clients,
+    @Schema(description = "Диапазоны выручки за прошлый год")
+    List<String> revenueRanges,
 
-    @Schema(description = "Раунды финансирования")
-    List<LookupValueDto> financing,
-
-    @Schema(description = "Виды валюты")
-    List<LookupValueDto> currency,
-
-    @Schema(description = "Список стран для первичного отображения")
-    List<LookupValueDto> country
+    @Schema(description = "Наличие решений с ИИ")
+    List<LookupValueDto> aiSolutions
 ) {
 }

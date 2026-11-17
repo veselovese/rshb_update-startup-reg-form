@@ -16,4 +16,7 @@ public interface StartupCategoryRepository extends JpaRepository<StartupCategory
 
   @Nonnull
   List<StartupCategory> findAllByDisabledIsFalse();
+
+  @Nonnull
+  List<StartupCategory> findAllByDisabledIsFalseOrderById();
 }

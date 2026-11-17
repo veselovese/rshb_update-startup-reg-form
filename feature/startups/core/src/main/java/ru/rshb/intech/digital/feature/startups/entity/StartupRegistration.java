@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
@@ -15,10 +17,10 @@ import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.rshb.intech.digital.feature.references.locations.cache.entity.LocationCity;
-import ru.rshb.intech.digital.feature.references.locations.cache.entity.LocationCountry;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(
@@ -45,34 +47,20 @@ public class StartupRegistration {
   @Column(name = "org")
   private String organization;
 
-  private String position;
-
   private String email;
 
   private String phone;
 
-  @Column(name = "vk_url")
-  private String vkProfileUrl;
+  @Column(name = "city_name")
+  private String city;
 
-  @ManyToOne(
-      cascade = {
-          CascadeType.MERGE,
-          CascadeType.PERSIST
-      },
-      fetch = FetchType.LAZY
-  )
-  @JoinColumn(name = "country_id")
-  private LocationCountry country;
+  private String inn;
 
-  @ManyToOne(
-      cascade = {
-          CascadeType.MERGE,
-          CascadeType.PERSIST
-      },
-      fetch = FetchType.LAZY
-  )
-  @JoinColumn(name = "city_id")
-  private LocationCity city;
+  @Column(name = "website_url")
+  private String websiteUrl;
+
+  @Column(name = "investor_name")
+  private String investorName;
 
   @Column(name = "proj_title")
   private String projectTitle;
@@ -86,34 +74,17 @@ public class StartupRegistration {
   @Column(name = "invest_val")
   private Long investmentsValue;
 
-  @ManyToOne(
-      cascade = {
-          CascadeType.MERGE,
-          CascadeType.PERSIST
-      },
-      fetch = FetchType.LAZY
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+      schema = "digital_startups",
+      name = "reg_showcase_categories",
+      joinColumns = @JoinColumn(name = "registration_id"),
+      inverseJoinColumns = @JoinColumn(name = "category_id")
   )
-  @JoinColumn(name = "invest_curr_id")
-  private StartupCurrency investmentsCurrency;
-
-  @ManyToOne(
-      cascade = {
-          CascadeType.MERGE,
-          CascadeType.PERSIST
-      },
-      fetch = FetchType.LAZY
-  )
-  @JoinColumn(name = "cat_id")
-  private StartupCategory category;
-
-  @Column(name = "cat_custom")
-  private String categoryCustom;
+  private List<StartupCategory> categories = new ArrayList<>();
 
   @Column(name = "founded_year")
   private Integer foundationYear;
-
-  @Column(name = "staff_size")
-  private Integer staffSize;
 
   @ManyToOne(
       cascade = {
@@ -125,25 +96,14 @@ public class StartupRegistration {
   @JoinColumn(name = "proj_stage_id")
   private StartupProjectStage projectStage;
 
-  @ManyToOne(
-      cascade = {
-          CascadeType.MERGE,
-          CascadeType.PERSIST
-      },
-      fetch = FetchType.LAZY
-  )
-  @JoinColumn(name = "clients_id")
-  private StartupClientsNumberVariant clientsNumberVariant;
+  @Column(name = "revenue_range")
+  private String revenueRange;
 
-  @ManyToOne(
-      cascade = {
-          CascadeType.MERGE,
-          CascadeType.PERSIST
-      },
-      fetch = FetchType.LAZY
-  )
-  @JoinColumn(name = "fin_round_id")
-  private StartupFinancingRound financingRound;
+  @Column(name = "has_ai_solutions")
+  private Boolean hasAiSolutions;
+
+  @Column(name = "video_url")
+  private String videoUrl;
 
   private Boolean suspicious = false;
 }

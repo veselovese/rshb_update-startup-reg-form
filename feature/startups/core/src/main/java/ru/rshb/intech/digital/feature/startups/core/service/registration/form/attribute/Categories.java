@@ -17,83 +17,71 @@ import ru.rshb.intech.digital.feature.startups.entity.StartupCategory;
 import ru.rshb.intech.digital.feature.startups.entity.StartupRegistration;
 import ru.rshb.intech.digital.messages.I18n;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * Атрибут "Категория (из списка)".
- * Форма заявки на включение стартапа в витрину.
- */
-@Component("startupRegFormCategoryId")
+@Component("startupRegFormCategories")
 @FormAttribute(StartupRegistrationForm.class)
-public class CategoryId extends Attribute<StartupRegistrationDto, String, StartupRegistration, StartupCategory> {
+public class Categories extends Attribute<StartupRegistrationDto, List<String>, StartupRegistration, List<StartupCategory>> {
 
   public static final String TITLE_KEY = "startups.registration.attr.category.fixed,name";
-  private static final int PROCESS_ORDER = 1;
 
-  public CategoryId(@Nonnull StartupRegistrationLookupService lookupService) {
+  public Categories(@Nonnull StartupRegistrationLookupService lookupService) {
     super(
         AttributeParams.Builder
-            .<StartupRegistrationDto, String, StartupRegistration, StartupCategory>create()
+            .<StartupRegistrationDto, List<String>, StartupRegistration, List<StartupCategory>>create()
             .name(I18n.of(TITLE_KEY))
-            .nullable(true)
-            .dataFormatValidator(new CategoryFormatValidator(lookupService))
-            .valueMapper(new CategoryValueMapper(lookupService))
+            .nullable(false)
+            .dataFormatValidator(new CategoriesFormatValidator(lookupService))
+            .valueMapper(new CategoriesValueMapper(lookupService))
             .build()
     );
   }
 
   @Override
-  public String supplyInputValue(@Nonnull StartupRegistrationDto inputData) {
-    return inputData.getCategoryId();
+  public List<String> supplyInputValue(@Nonnull StartupRegistrationDto inputData) {
+    return inputData.getCategoryIds();
   }
 
   @Override
-  public void consumeOutputValue(StartupCategory outputValue, @Nonnull StartupRegistration outputData) {
-    outputData.setCategory(outputValue);
-  }
-
-  @Override
-  public int processOrder() {
-    return PROCESS_ORDER;
+  public void consumeOutputValue(List<StartupCategory> outputValue, @Nonnull StartupRegistration outputData) {
+    outputData.setCategories(outputValue);
   }
 
   @RequiredArgsConstructor
-  private static class CategoryFormatValidator
-      extends BasicDataFormatValidator<StartupRegistrationDto, String, StartupRegistration> {
+  private static class CategoriesFormatValidator
+      extends BasicDataFormatValidator<StartupRegistrationDto, List<String>, StartupRegistration> {
 
     private final StartupRegistrationLookupService lookupService;
 
     @Override
-    public <A extends AttributeParams<StartupRegistrationDto, String, StartupRegistration, ?>>
-      void validate(String externalId,
+    public <A extends AttributeParams<StartupRegistrationDto, List<String>, StartupRegistration, ?>>
+      void validate(List<String> externalIds,
                     @Nonnull A attrProps,
                     @Nonnull FormContext<StartupRegistrationDto, StartupRegistration> context)
         throws AttributeValueMissingException, AttributeBadFormatException {
 
-      super.validate(externalId, attrProps, context);
+      super.validate(externalIds, attrProps, context);
 
-      if (isBlank(externalId)) {
-        return;
-      }
-
-      if (!lookupService.isCategoryExist(externalId)) {
+      if (externalIds == null || externalIds.isEmpty()
+          || externalIds.stream().anyMatch(id -> id == null || !lookupService.isCategoryExist(id))) {
         throw new AttributeBadFormatException(attrProps.getName());
       }
     }
   }
 
   @RequiredArgsConstructor
-  private static class CategoryValueMapper implements ValueMapper<String, StartupCategory> {
+  private static class CategoriesValueMapper implements ValueMapper<List<String>, List<StartupCategory>> {
 
     private final StartupRegistrationLookupService lookupService;
 
     @Override
-    public <D, E> StartupCategory map(String externalId, @Nonnull FormContext<D, E> context) {
-      return isNotBlank(externalId)
-          ? lookupService.findCategory(externalId)
-            .orElseThrow(() -> new AttributeBadFormatException(I18n.of(CategoryId.TITLE_KEY)))
-          : null;
+    public <D, E> List<StartupCategory> map(List<String> externalIds, @Nonnull FormContext<D, E> context) {
+      return externalIds.stream()
+          .map(id -> lookupService.findCategory(id)
+              .orElseThrow(() -> new AttributeBadFormatException(I18n.of(Categories.TITLE_KEY))))
+          .collect(Collectors.toCollection(ArrayList::new));
     }
   }
 }
